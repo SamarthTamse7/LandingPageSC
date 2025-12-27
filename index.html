@@ -1,0 +1,866 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Company</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <link rel="stylesheet" href="style.css">
+</head>
+<style>
+    :root {
+        --primary: white;
+        /* --secondary: #1F3A5F; */
+        --secondary: royalblue;
+        --toptext: white;
+    }
+
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: "BBH Bogle", sans-serif;
+    }
+
+    body {
+        background-color: var(--primary);
+    }
+
+    body::-webkit-scrollbar {
+        display: none;
+    }
+
+    #hero {
+        height: 100vh;
+        overflow: hidden;
+        width: 100vw;
+        display: flex;
+        position: relative;
+    }
+
+    .imagesTop {
+        height: 100%;
+        width: 100%;
+        background-color: rosybrown;
+        /* border: 1px solid black; */
+        position: absolute;
+        right: -100%;
+        overflow: hidden;
+        filter: brightness(40%);
+    }
+
+    #imgs {
+        filter: brightness(40%);
+        height: 100%;
+        width: 100%;
+        background-color: rosybrown;
+    }
+
+    .imagesTop img {
+        height: 100vh;
+        width: 100vw;
+        position: absolute;
+        left: -100%;
+        object-fit: cover;
+        object-position: center;
+    }
+
+    #writtenDiv {
+        height: 100%;
+        width: 100%;
+        background-color: transparent;
+        position: absolute;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        padding: 0px 40px;
+    }
+
+    #writtenDiv h1 {
+        font-size: 6vw;
+        color: var(--primary);
+    }
+
+    #writtenDiv b {
+        font-size: 40px;
+        color: var(--toptext);
+        margin: 5px 0px;
+    }
+
+    #writtenDiv #buttons {
+        height: 70px;
+        width: 100%;
+        background-color: transparent;
+        margin-top: 20px;
+        display: flex;
+        align-items: center;
+        gap: 20px;
+        flex-wrap: wrap;
+    }
+
+    #applyBtn,
+    #counBtn {
+        height: 100%;
+        width: 200px;
+        background: var(--secondary);
+        border-radius: 5px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: var(--primary);
+        font-size: larger;
+        font-weight: bold;
+        margin: 0px 0px;
+        position: relative;
+        transition: .2s all;
+        overflow: hidden;
+        z-index: 0;
+        opacity: 0;
+    }
+
+    #counBtn {
+        background-color: var(--primary);
+        color: var(--secondary);
+    }
+
+    #applyBtn::after {
+        content: '';
+        height: 100%;
+        width: 100%;
+        background-color: var(--primary);
+        position: absolute;
+        bottom: -100%;
+        z-index: -1;
+        transition: .2s all;
+    }
+
+    #applyBtn:hover::after {
+        bottom: 0%;
+    }
+
+    #applyBtn:hover {
+        color: var(--secondary);
+    }
+
+    #counBtn::after {
+        content: '';
+        height: 100%;
+        width: 100%;
+        background-color: var(--secondary);
+        position: absolute;
+        bottom: -100%;
+        z-index: -1;
+        transition: .2s all;
+    }
+
+    #counBtn:hover::after {
+        bottom: 0%;
+    }
+
+    #counBtn:hover {
+        color: var(--primary);
+    }
+
+    @media (max-width: 500px) {
+        #writtenDiv h1 {
+            font-size: 30px;
+        }
+
+        #writtenDiv b {
+            font-size: 20px;
+        }
+    }
+
+    #services {
+        height: auto;
+        width: 100vw;
+        background-color: var(--primary);
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        padding: 30px 20px;
+        gap: 20px;
+    }
+
+    #services h1 {
+        font-size: 5vw;
+        color: var(--secondary);
+    }
+
+    #services #reasons {
+        height: auto;
+        width: 100%;
+        background-color: transparent;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: center;
+        gap: 20px;
+    }
+
+    .reason {
+        height: 500px;
+        width: 350px;
+        background: var(--secondary);
+        border-radius: 20px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 20px;
+        flex-direction: column;
+        padding: 20px 20px;
+        box-shadow: 5px 5px 10px #000000;
+    }
+
+    .reason h2 {
+        color: #dadada;
+        font-size: 40px;
+    }
+
+    .reason p {
+        text-align: center;
+        color: #dadada;
+        font-size: 20px;
+        font-weight: bold;
+    }
+
+    @media (max-width: 500px) {
+        #services h1 {
+            font-size: 35px;
+        }
+    }
+
+    #courses {
+        height: auto;
+        width: 100%;
+        background-color: var(--secondary);
+        padding: 30px 30px;
+    }
+
+    #courses #innerDiv {
+        height: auto;
+        width: 100%;
+        background-color: var(--primary);
+        border-radius: 20px;
+        overflow: hidden;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-wrap: wrap;
+        padding: 20px 0px;
+    }
+
+    #lSec {
+        height: auto;
+        width: 40%;
+        background-color: transparent;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 30px;
+        min-width: 400px;
+        padding: 30px 30px;
+    }
+
+    #rSec {
+        height: auto;
+        width: 60%;
+        background-color: transparent;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        padding: 0px 30px;
+        /* min-width: 400px; */
+    }
+
+    #rSec img {
+        height: 300px;
+        width: 100%;
+        object-fit: cover;
+        object-position: center;
+        color: var(--secondary);
+        border-radius: 10px;
+        border: 5px solid var(--secondary);
+    }
+
+    #rSec h1 {
+        color: var(--secondary);
+    }
+
+    #courses h1 {
+        color: var(--secondary);
+    }
+
+    #courseList {
+        height: auto;
+        width: 100%;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: center;
+        gap: 20px;
+    }
+
+    .course {
+        height: 250px;
+        width: 250px;
+        border-radius: 10px;
+        background-color: var(--secondary);
+        display: flex;
+        flex-direction: column;
+        color: var(--primary);
+        justify-content: space-evenly;
+        align-items: center;
+    }
+
+    @media (max-width: 1024px) {
+        #rSec {
+            width: 100%;
+            padding: 0px 10px;
+        }
+
+        #courses {
+            padding: 10px 10px;
+        }
+    }
+
+    #steps {
+        height: auto;
+        width: 100vw;
+        background-color: var(--primary);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        color: var(--secondary);
+        padding: 20px 20px 50px 20px;
+    }
+
+    #steps h1 {
+        font-size: 5vw;
+    }
+
+    #stepsDiv {
+        height: auto;
+        width: 100%;
+        background-color: transparent;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 30px;
+    }
+
+    .step {
+        height: 400px;
+        width: 30%;
+        min-width: 300px;
+        background-color: var(--secondary);
+        border-radius: 20px;
+        padding: 20px 20px;
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+        box-shadow: 5px 5px 10px #000000;
+    }
+
+    .step img {
+        height: 300px;
+        width: 100%;
+        object-fit: cover;
+        object-position: center;
+        border-radius: 10px;
+    }
+
+    .step h2 {
+        font-size: 30px;
+        color: var(--primary);
+    }
+
+    @media (max-width: 500px) {
+        #steps h1 {
+            font-size: 35px;
+        }
+    }
+
+    #contact {
+        height: auto;
+        width: 100vw;
+        background-color: var(--secondary);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-wrap: wrap;
+        padding: 30px 30px;
+    }
+
+    #contact #innerDiv {
+        height: 100%;
+        border-radius: 10px;
+        width: 100%;
+        background-color: var(--primary);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        overflow: hidden;
+        flex-wrap: wrap;
+    }
+
+    #ls {
+        height: 300px;
+        width: 30%;
+        background: url(https://plus.unsplash.com/premium_photo-1680303134459-912abf8efe2f?q=80&w=1032&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D);
+        background-position: center;
+        background-size: cover;
+    }
+
+    #rs {
+        height: 300px;
+        width: 70%;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+    }
+
+    #rs #up {
+        height: auto;
+        width: 100%;
+        background-color: var(--primary);
+        padding: 20px 20px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+    }
+
+    #rs #dw {
+        height: auto;
+        width: 100%;
+        background-color: rgb(35, 35, 35);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: var(--primary);
+        padding: 10px 10px;
+    }
+
+    @media (max-width: 768px) {
+
+        #ls,
+        #rs {
+            width: 100%;
+        }
+    }
+
+    nav {
+        height: 50px;
+        width: 100%;
+        background-color: var(--secondary);
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0px 20px;
+        position: fixed;
+        top: 0px;
+        z-index: 999;
+        color: white;
+    }
+
+    nav #opts {
+        width: auto;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100%;
+    }
+
+    .option {
+        margin: 0px 5px;
+        font-weight: bold;
+        height: auto;
+        width: auto;
+        padding: 8px 10px;
+        transition: .2s all;
+        border-radius: 20px;
+    }
+
+
+
+    #optio {
+        margin: 0px 5px;
+        font-weight: bold;
+        height: auto;
+        width: auto;
+        padding: 8px 10px;
+        transition: .2s all;
+        border-radius: 30px;
+    }
+
+    .option:hover {
+        background-color: #ffffff;
+        color: royalblue;
+    }
+
+    .optionSelected {
+        background-color: #ffffff;
+        height: auto;
+        width: auto;
+        padding: 8px 10px;
+        border-radius: 20px;
+        color: royalblue;
+    }
+
+    #menu {
+        display: none;
+        height: 100%;
+        width: 40px;
+        /* background-color: #ffffff; */
+        font-weight: bold;
+        font-size: large;
+    }
+
+
+
+    .opts {
+        height: 100vh;
+        width: 300px;
+        background-color: var(--secondary);
+        position: fixed;
+        right: -300px;
+        top: 0;
+        z-index: 999;
+        padding: 20px 0px;
+        color: white;
+        border-left: 1px solid black;
+    }
+
+    @media (max-width: 748px) {
+        #menu {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        nav {
+            padding: 0px 0px 0px 10px;
+        }
+
+        #opts {
+            display: none;
+        }
+
+        #opts .option {
+            display: none;
+        }
+
+    }
+
+    #collegesIsland , #courseIsland {
+        height: 100vh;
+        width: 100vw;
+        background-color: rgba(0, 0, 0, 0.38);
+        position: fixed;
+        z-index: 1000;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        top: -100%;
+    }
+
+    #collegesIsland #innerSec , #courseIsland #innerSecs{
+        height: 500px;
+        width: 700px;
+        background-color: #ffffff;
+        border-radius: 10px;
+        overflow-y: scroll;
+        padding: 50px 0px 0px 0px;
+        position: relative;
+    }
+
+    #collegesIsland #innerSec input , #courseIsland #innerSecs input {
+        position: absolute;
+        top: 0px;
+    }
+
+    #collegesIsland #innerSec .college,
+    #collegesIsland #innerSec input , #courseIsland #innerSecs .coursess,
+    #courseIsland #innerSecs input {
+        min-height: 50px;
+        height: auto;
+        width: 100%;
+        padding: 0px 20px;
+        border-top: 1px solid gray;
+    }
+
+    #collegesIsland #innerSec .college, #courseIsland #innerSecs .coursess {
+        display: flex;
+        align-items: center;
+        padding: 0px 20px;
+    }
+
+    #wrongOpt , #wrongOptC{
+        height: 40px;
+        width: 40px;
+        border-radius: 50%;
+        position: absolute;
+        top: 30px;
+        background-color: #dadada;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+</style>
+
+<body>
+    <nav>
+        <div id="logo">LOGO</div>
+        <div id="opts">
+            <div class="option optionSelected">Home</div>
+            <div class=" option" id="collegeshow">Colleges</div>
+            <div class="option" id="courseSho">Courses</div>
+            <div class="option">Success Stories</div>
+            <!-- <div class="option"><a>Login</a></div> -->
+        </div>
+        <div id="menu">
+            <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" fill="currentColor" class="bi bi-list"
+                viewBox="0 0 16 16">
+                <path fill-rule="evenodd"
+                    d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5" />
+            </svg>
+        </div>
+    </nav>
+
+    <div class="opts">
+        <div id="optio">
+            <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" fill="currentColor" class="bi bi-x-lg"
+                viewBox="0 0 16 16">
+                <path
+                    d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8z" />
+            </svg>
+        </div>
+        <div class="option optionSelected">Home</div>
+        <div class=" option" id="collegeshow2">Colleges</div>
+        <div class="option" id="courseSho2">Courses</div>
+        <!-- <div class="option">Application</div> -->
+        <div class="option">Success Stories</div>
+    </div>
+
+    <div id="collegesIsland">
+        <div id="wrongOpt">
+            <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" fill="currentColor" class="bi bi-x-lg"
+                viewBox="0 0 16 16">
+                <path
+                    d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8z" />
+            </svg>
+        </div>
+        <div id="innerSec">
+            <input id="colSer" type="text" placeholder="Search Your Interested Colleges">
+        </div>
+    </div>
+
+    <div id="courseIsland">
+        <div id="wrongOptC">
+            <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" fill="currentColor" class="bi bi-x-lg"
+                viewBox="0 0 16 16">
+                <path
+                    d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8z" />
+            </svg>
+        </div>
+        <div id="innerSecs" >
+            <input id="colSers" type="text" placeholder="Search Your Interested Course">
+        </div>
+    </div>
+
+    <div id="hero">
+        <div id="imgs">
+            <img src="https://images.unsplash.com/photo-1730497985274-504ffac6cc66?q=80&w=1740&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+                style="width: 100%; height: 100%; object-fit: cover;object-position: center;" alt="">
+        </div>
+        <div id="image1" class="imagesTop">
+            <img src="https://images.unsplash.com/photo-1571260899304-425eee4c7efc?q=80&w=1740&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+                alt="">
+        </div>
+        <div id="image2" class="imagesTop">
+            <img src="https://images.unsplash.com/photo-1525921429624-479b6a26d84d?q=80&w=870&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+                alt="">
+        </div>
+        <div id="image3" class="imagesTop">
+            <img src="https://images.unsplash.com/photo-1730497985274-504ffac6cc66?q=80&w=1740&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+                alt="">
+        </div>
+
+        <div id="writtenDiv">
+            <h1 class="heroAnime">Get Admission Guidance</h1>
+            <h1 style="color: rosybrown;" class="heroAnime">From The Experts!!</h1>
+            <b class="heroAnime" style="margin-top: 20px;"><svg xmlns="http://www.w3.org/2000/svg" width="26"
+                    height="26" fill="currentColor" class="bi bi-circle-fill" viewBox="0 0 16 16">
+                    <circle cx="8" cy="8" r="8" />
+                </svg> Find Best Colleges & Courses</b>
+            <b class="heroAnime"><svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" fill="currentColor"
+                    class="bi bi-circle-fill" viewBox="0 0 16 16">
+                    <circle cx="8" cy="8" r="8" />
+                </svg> Apply Online</b>
+            <b class="heroAnime"><svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" fill="currentColor"
+                    class="bi bi-circle-fill" viewBox="0 0 16 16">
+                    <circle cx="8" cy="8" r="8" />
+                </svg> Get Personal Counseling</b>
+            <div id="buttons">
+                <div id="applyBtn">Apply Online</div>
+                <div id="counBtn">Get Counseling</div>
+            </div>
+        </div>
+    </div>
+
+    <div id="services">
+        <h1>Why Choose Us?</h1>
+        <div id="reasons">
+            <div class="reason">
+                <h2>Reason</h2>
+                <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Repellat corrupti eveniet ipsum repellendus
+                    libero adipisci suscipit aliquid assumenda minus esse?</p>
+            </div>
+            <div class="reason">
+                <h2>Reason</h2>
+                <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Repellat corrupti eveniet ipsum repellendus
+                    libero adipisci suscipit aliquid assumenda minus esse?</p>
+            </div>
+            <div class="reason">
+                <h2>Reason</h2>
+                <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Repellat corrupti eveniet ipsum repellendus
+                    libero adipisci suscipit aliquid assumenda minus esse?</p>
+            </div>
+        </div>
+    </div>
+
+    <div id="courses">
+        <div id="innerDiv">
+            <div id="lSec">
+                <h1>Our Courses</h1>
+                <div id="courseList">
+                    <div class="course">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="106" height="106" fill="currentColor"
+                            class="bi bi-gear-fill" viewBox="0 0 16 16">
+                            <path
+                                d="M9.405 1.05c-.413-1.4-2.397-1.4-2.81 0l-.1.34a1.464 1.464 0 0 1-2.105.872l-.31-.17c-1.283-.698-2.686.705-1.987 1.987l.169.311c.446.82.023 1.841-.872 2.105l-.34.1c-1.4.413-1.4 2.397 0 2.81l.34.1a1.464 1.464 0 0 1 .872 2.105l-.17.31c-.698 1.283.705 2.686 1.987 1.987l.311-.169a1.464 1.464 0 0 1 2.105.872l.1.34c.413 1.4 2.397 1.4 2.81 0l.1-.34a1.464 1.464 0 0 1 2.105-.872l.31.17c1.283.698 2.686-.705 1.987-1.987l-.169-.311a1.464 1.464 0 0 1 .872-2.105l.34-.1c1.4-.413 1.4-2.397 0-2.81l-.34-.1a1.464 1.464 0 0 1-.872-2.105l.17-.31c.698-1.283-.705-2.686-1.987-1.987l-.311.169a1.464 1.464 0 0 1-2.105-.872zM8 10.93a2.929 2.929 0 1 1 0-5.86 2.929 2.929 0 0 1 0 5.858z" />
+                        </svg>
+                        <h2>Engineering</h2>
+                    </div>
+                    <div class="course">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="106" height="106" fill="currentColor"
+                            class="bi bi-heart-pulse-fill" viewBox="0 0 16 16">
+                            <path
+                                d="M1.475 9C2.702 10.84 4.779 12.871 8 15c3.221-2.129 5.298-4.16 6.525-6H12a.5.5 0 0 1-.464-.314l-1.457-3.642-1.598 5.593a.5.5 0 0 1-.945.049L5.889 6.568l-1.473 2.21A.5.5 0 0 1 4 9z" />
+                            <path
+                                d="M.88 8C-2.427 1.68 4.41-2 7.823 1.143q.09.083.176.171a3 3 0 0 1 .176-.17C11.59-2 18.426 1.68 15.12 8h-2.783l-1.874-4.686a.5.5 0 0 0-.945.049L7.921 8.956 6.464 5.314a.5.5 0 0 0-.88-.091L3.732 8z" />
+                        </svg>
+                        <h2>Paramedical</h2>
+                    </div>
+                </div>
+            </div>
+            <div id="rSec">
+                <h1>Top Colleges List</h1>
+                <img src="https://images.unsplash.com/photo-1592280771190-3e2e4d571952?q=80&w=774&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+                    alt="" id="img">
+            </div>
+        </div>
+    </div>
+
+    <div id="steps">
+        <h1>Steps to get started</h1>
+        <div id="stepsDiv">
+            <div class="step">
+                <h2>Step 1. Fill Form</h2>
+                <img src="https://plus.unsplash.com/premium_photo-1681487870238-4a2dfddc6bcb?q=80&w=580&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+                    alt="">
+            </div>
+            <div class="step">
+                <h2>Step 2. Make Payment
+                </h2>
+                <img src="https://images.unsplash.com/photo-1609429019995-8c40f49535a5?q=80&w=869&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+                    alt="">
+            </div>
+            <div class="step">
+                <h2>Step 3. Get Counseled</h2>
+                <img src="https://plus.unsplash.com/premium_photo-1661440019992-c4cea26572aa?q=80&w=870&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+                    alt="">
+            </div>
+        </div>
+    </div>
+
+    <div id="contact">
+        <div id="innerDiv">
+            <div id="ls"></div>
+            <div id="rs">
+                <div id="up">
+                    <h1>Have Quenstions?</h1>
+                    <h2>call : +9008665469</h2>
+                </div>
+                <div id="dw">
+                    <p style="font-weight: normal; text-transform: lowercase;">Description :- Lorem ipsum dolor sit amet
+                        consectetur adipisicing elit. Porro, voluptates reprehenderit excepturi recusandae nulla,
+                        molestias soluta consequuntur sunt ducimus, quidem veritatis ad! Rerum placeat, veniam numquam
+                        laborum debitis unde at.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <footer class="row row-cols-1 row-cols-sm-2 row-cols-md-5 py-5 my-5 border-top">
+            <div class="col mb-3"> <a href="/"
+                    class="d-flex align-items-center mb-3 link-body-emphasis text-decoration-none"
+                    aria-label="Bootstrap"> <svg class="bi me-2" width="40" height="32" aria-hidden="true">
+                        <use xlink:href="#bootstrap"></use>
+                    </svg> </a>
+                <p class="text-body-secondary">© 2025</p>
+            </div>
+            <div class="col mb-3"></div>
+            <div class="col mb-3">
+                <h5>Section</h5>
+                <ul class="nav flex-column">
+                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">Home</a></li>
+                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">Features</a></li>
+                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">Pricing</a></li>
+                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">FAQs</a></li>
+                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">About</a></li>
+                </ul>
+            </div>
+            <div class="col mb-3">
+                <h5>Section</h5>
+                <ul class="nav flex-column">
+                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">Home</a></li>
+                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">Features</a></li>
+                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">Pricing</a></li>
+                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">FAQs</a></li>
+                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">About</a></li>
+                </ul>
+            </div>
+            <div class="col mb-3">
+                <h5>Section</h5>
+                <ul class="nav flex-column">
+                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">Home</a></li>
+                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">Features</a></li>
+                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">Pricing</a></li>
+                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">FAQs</a></li>
+                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">About</a></li>
+                </ul>
+            </div>
+        </footer>
+    </div>
+
+
+    <script src="https://unpkg.com/lenis@1.3.16/dist/lenis.min.js"></script>
+    <script src="gsap.min.js"></script>
+    <script src="ScrollTrigger.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
+        crossorigin="anonymous"></script>
+    <script src="script.js"></script>
+</body>
+
+</html>

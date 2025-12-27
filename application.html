@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>College Directory</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <style>
+        :root {
+            --primary: #ffffff;
+            --secondary: crimson;
+            --text-dark: #333;
+            --shadow: rgba(0, 0, 0, 0.1);
+        }
+
+        * {
+            box-sizing: border-box;
+            font-family: "Segoe UI", sans-serif;
+        }
+
+        body {
+            margin: 0;
+            background: url(https://images.unsplash.com/photo-1680084521631-e4e6d77704d8?q=80&w=870&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D);
+            background-position: center;
+            background-size: cover;
+            background-repeat: no-repeat;
+            color: var(--text-dark);
+            overflow-x: hidden;
+            height: auto;
+            width: 100vw;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 30px auto;
+            padding: 0 20px;
+        }
+
+        .search-box {
+            margin-bottom: 25px;
+            text-align: center;
+        }
+
+        .search-box input {
+            width: 100%;
+            max-width: 400px;
+            padding: 12px 15px;
+            font-size: 1rem;
+            border-radius: 8px;
+            border: 2px solid var(--secondary);
+            outline: none;
+        }
+
+        .college-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        .college-card {
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: 0 10px 20px var(--shadow);
+            border-left: 6px solid var(--secondary);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .college-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px var(--shadow);
+        }
+
+        .college-name {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--secondary);
+        }
+
+        nav {
+            height: 50px;
+            width: 100%;
+            background-color: var(--secondary);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0px 20px;
+        }
+
+        nav #opts {
+            width: auto;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100%;
+        }
+
+        .option {
+            margin: 0px 5px;
+            font-weight: bold;
+            height: auto;
+            width: auto;
+            padding: 8px 10px;
+            transition: .2s all;
+            border-radius: 5px;
+        }
+
+
+
+        #optio {
+            margin: 0px 5px;
+            font-weight: bold;
+            height: auto;
+            width: auto;
+            padding: 8px 10px;
+            transition: .2s all;
+            border-radius: 20px;
+        }
+
+        .option:hover {
+            background-color: #ffffff;
+        }
+
+        .optionSelected {
+            background-color: #ffffff;
+            height: auto;
+            width: auto;
+            padding: 8px 10px;
+            border-radius: 5px;
+        }
+
+        #menu {
+            display: none;
+            height: 100%;
+            width: 40px;
+            /* background-color: #ffffff; */
+            font-weight: bold;
+            font-size: large;
+        }
+
+
+
+        .opts {
+            height: 100vh;
+            width: 200px;
+            background-color: var(--secondary);
+            position: fixed;
+            right: -200px;
+            top: 0;
+            z-index: 999;
+            padding: 20px 0px;
+        }
+
+        @media (max-width: 748px) {
+            #menu {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+
+            nav {
+                padding: 0px 0px 0px 10px;
+            }
+
+            #opts {
+                display: none;
+            }
+
+            #opts .option {
+                display: none;
+            }
+
+        }
+    </style>
+</head>
+
+<body>
+
+    <nav>
+        <div id="logo">LOGO</div>
+        <div id="opts">
+            <div class="option">Home</div>
+            <div class="optionSelected option">Colleges</div>
+            <div class="option">Courses</div>
+            <div class="option">Application</div>
+            <div class="option">Contact</div>
+        </div>
+        <div id="menu">
+            <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" fill="currentColor" class="bi bi-list"
+                viewBox="0 0 16 16">
+                <path fill-rule="evenodd"
+                    d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5" />
+            </svg>
+        </div>
+    </nav>
+
+    <div class="opts">
+        <div id="optio">
+            <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" fill="currentColor" class="bi bi-x-lg"
+                viewBox="0 0 16 16">
+                <path
+                    d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8z" />
+            </svg>
+        </div>
+        <div class="option">Home</div>
+        <div class="optionSelected option">Colleges</div>
+        <div class="option">Courses</div>
+        <div class="option">Application</div>
+        <div class="option">Contact</div>
+    </div>
+
+    <div class="container">
+
+        <div class="search-box">
+            <input type="text" id="searchInput" placeholder="Search college name...">
+        </div>
+
+        <div class="college-grid" id="collegeList"></div>
+
+    </div>
+
+
+    <script src="gsap.min.js"></script>
+    <script>
+        const colleges = [
+            "Harvard University",
+            "Stanford University",
+            "Massachusetts Institute of Technology",
+            "University of Oxford",
+            "University of Cambridge",
+            "California Institute of Technology",
+            "Princeton University",
+            "Yale University",
+            "Columbia University",
+            "University of Chicago",
+            "Indian Institute of Technology Bombay",
+            "Indian Institute of Technology Delhi",
+            "Indian Institute of Science Bangalore",
+            "University of Toronto",
+            "National University of Singapore",
+            "University of Melbourne",
+            "University of California, Berkeley",
+            "University of California, Los Angeles",
+            "New York University",
+            "Imperial College London"
+        ];
+
+        const collegeList = document.getElementById("collegeList");
+        const searchInput = document.getElementById("searchInput");
+
+        function renderColleges(filter = "") {
+            collegeList.innerHTML = "";
+
+            colleges
+                .filter(college =>
+                    college.toLowerCase().includes(filter.toLowerCase())
+                )
+                .forEach(college => {
+                    const card = document.createElement("div");
+                    card.className = "college-card";
+
+                    card.innerHTML = `
+                    <div class="college-name">${college}</div>
+                `;
+
+                    collegeList.appendChild(card);
+                });
+        }
+
+        searchInput.addEventListener("input", (e) => {
+            renderColleges(e.target.value);
+        });
+
+        renderColleges();
+
+        let navtimeline = gsap.timeline({paused: true});
+
+        navtimeline.to(".opts", {
+            right: "0px",
+            duration: 0.7,
+        })
+
+
+        document.getElementById("menu").addEventListener("click", () => {
+            navtimeline.play();
+        })
+
+        document.getElementById("optio").addEventListener("click", () => {
+            navtimeline.reverse();
+        })
+    </script>
+
+</body>
+
+</html>
